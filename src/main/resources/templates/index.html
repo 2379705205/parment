@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>初心支付系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">初心 By 2379705205</div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="" id="name"></a>
+                <!--<dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    &lt;!&ndash;<dd><a href="">安全设置</a></dd>&ndash;&gt;
+                </dl>-->
+            </li>
+            <li class="layui-nav-item"><a href="javascript:delCookie('chuxin');">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" id="tree" lay-filter="test">
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <iframe id="src" src="html/welcome.html" width="100%" height="100%"></iframe>
+    </div>
+    <div class="layui-footer">
+        © 2379705205@qq.com - 如有问题请联系本邮箱
+    </div>
+</div>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/menu",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                var list = data.list
+                var html="";
+                $(list).each(function(i,e){
+                if(e.pid==0){
+                    html+= "<li class='layui-nav-item'><a href='javascript:;'>"+e.menuName+"</a>"
+                    $(list).each(function(n,c){
+                        console.log(c.menuName)
+                        if(e.id==c.pid){
+                            html+="<dl class='layui-nav-child'><dd><a href=javascript:click('"+c.menuUrl+"');>"+c.menuName+"</a></dd></dl>"
+                        }
+                    })
+                    html+="</li>"
+                }
+                })
+                $("#tree").append(html);
+            }
+        })
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/findByUser",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                $("#name").append(data.object.name)
+            }
+        })
+    })
+</script>
+
+<script>
+    setTimeout(function () {
+       if($("#name").text()==null || $("#name").text()==""){
+        window.location.href="/login"
+       }
+    }, 100);
+
+    function click(url){
+        console.log("跳转页面url->>"+url)
+        $("#src").attr("src",url);
+    }
+    function getCookie(name){
+        let arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]);
+        return null;
+    }
+    function delCookie(name){
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = getCookie(name);
+        if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+        window.location.href="/login"
+    }
+</script>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+</script>
+</body>
+</html>

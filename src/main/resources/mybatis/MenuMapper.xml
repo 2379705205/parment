@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.mapper.MenuMapper">
+    <resultMap id="returnMenu" type="com.zc.pojo.Menu">
+        <id property="id" column="id"/>
+        <result property="isMenu" column="is_menu"/>
+        <result property="menuPic" column="menu_pic"/>
+        <result property="menuCode" column="menu_code"/>
+        <result property="menuName" column="menu_name"/>
+        <result property="menuUrl" column="menu_url"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="PId" column="p_id"/>
+    </resultMap>
+
+    <select id="findByUserId" parameterType="string" resultMap="returnMenu">
+        SELECT m.* from menu m,role_menu rm,role r,role_user ru
+        where
+        m.id = rm.menu_id and
+        r.id=ru.role_id and
+        ru.user_id = #{value}
+        ORDER BY
+        m.order_num
+    </select>
+
+
+</mapper>

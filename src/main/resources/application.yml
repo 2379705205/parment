@@ -1,0 +1,66 @@
+server:
+  port: 80
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/verification?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    servlet:
+      content-type: text/html
+    cache: false
+    suffix: .html
+    encoding: utf-8
+    check-template-location: true
+    prefix: classpath:/templates/
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    show-sql: true
+    open-in-view: true
+  mvc:
+    servlet:
+      path: /
+mybatis:
+  mapper-locations: classpath:/mybatis/*.xml
+  #添加Thymeleaf配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+
+easy:
+  pay:
+    #支付宝支付参数配置
+    alipay:
+      #应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
+      appId: 2019121960063101
+      #商户私钥，您的PKCS8格式RSA2私钥
+      privateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCjyPSqEic1CRZr4zx5I8K2ZrK+1z207gdTdu+YRP6l+8zHBr+0pMyU/n0PdmHGnnA7QS0EbrVyVZGE+Gb1wFiYgXBhZ1s4CM5ZBqOQCPsu1B2tn333mX7RWzLomoH3nzhyLSmAThdQtdsFVUY/BgrkBrjrpw3RaFRJfUcx17gqQGuxfTbRSrOtDQL6eT5H8PaeZwHRH5JT/Shg4D/BlvM4DT6+mLTXxUh36PPr+IJrn4b/wmdz4g6ohoFbrEXaswV8rF7UH6ZNpFE/OD2/dBIRg7kDGEUmtO1pysdPq8ckJBoZUrMUtgOdA7f6uz8gWLVuEv3/S2jSyip/caz7U10NAgMBAAECggEAFF2HdqI9N84CeLXPrixxKKcKcMpoxNeYF5vBXQivNUpjAxhmu/qF6bzfJg4NSFopEGUhSNzPOQFEz+jnPIWHPqdRpvroD8agiddWfTFwsjjz28PqMOBoMXYKlXuoz3Z/2UqeT3LmWUXTjw00Z9/DeOkRE1Q5VqGHYX/vW1Y8cxxOk6EioEKly/TCeMJlR+6Nz8Vltmg2Yf5WxYh/hsWKRKD1gLNjOL+SvOWHB0oI36zZmJv2R9TVpoL2QuUUeSiyf39L/eCHoIjAnAAXFd0hIQAnSvCQVImuDaVPk6EOorlHWyLXMHChuHeJ2O417c4nV2qSbmH16FMw7gcU9F0wQQKBgQDUCvMIB3M+hJcWznd3tE1vXZSbs6NpB0HtYvMxoD3rnP5qrqiTwxI0b4d+8grNtHseErOCVyiZBNEH5m9VdLoRFRsdmeN0eRZ3qF6PqFbIJadaGZgQrla4D/qLjR1Mm3sfydoYOwvZFvQYJTrjeWlGCzSr2DH0P3NlEFvVgsEEHQKBgQDFvPqj2/2oB/3XY+37qFisuJGjOSn0hCfu8MEyuFtqfpbBqe/xc5xBea+WkIeSKwpbv61zDRuNmSJdmPIxAuJw5UvYC4E6j8Zka2GsJN4NAPZ3ofk88vLYWj3lVujBuhQRk2pVEabUwgYgjrjImTRSx9677ZkNttWt7b/0M5yJsQKBgAfb5AgPJqFRjrwEqP7hyuDuyfw/WzYgU7w1p6fWNZVO+0r+8DaRy1HwNEhrNiVLpCiILukMy+9n80tkqgmzytWpP5kIRBrkBgYnUmHmrli6tIotWqp7m7E0vmd/sm9Nb/HMrG2repPwOtnOP3GA5Xr4HVqlJ6zS0TcUtSKjtv2tAoGBAIgFeXyiZhjidnFmIl0M7wLRbA2V0xCKoFWzc5MKUogtUFMkLRQw7Pn1VR4Did64kMWQUyZji+KZxpQQE/o2+8GhWcziDSFVqamGXIfoTH8xfFnLKAIPNZIycYWDhVVORWPZvjmKjPKqDUD0LJSBHwcaylMIHFLcxJyCgZrgrfvhAoGANj9eTGzSoH3XOKvGCqJk8fikQHqG+BdkJqU2Y4IH1UvqcC95/x7zun0UHwzF6DaovT6CafEdxDrH+RRP+vRj+Dxh/f/+fls1+1EZ/7X/7VnBpW8QsYrQjF/q6tkGBfNRNrauYkTxMwuQHvbxumXZstcAYs3ugKCTl17Oa2n0Rcg=
+      publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnff7ccaut9tKs/LoX4Yx7GsQhzNlyPCBBZqvxBDZsg8wikg1r93wH/79mZI3tg8qg2AlBtWDUgfx40/3WzDa9v8BwGHJia2EM6qaDB5m+GGEq+PVzo+kQNWizQaHmQNWI7fjqlCne7MF5ptKe0GqMjDDiX8uVoZXt3QOO8FaEInCU7sjqd8z5OS/Jaz8okLUlQitaS7qRPb+ygpWGpleCl28v3ApowIlru5JazuVwUUuQqyMYwBQVvPDg2eg6NnGNMCSQjihhlsD4CeJLlwp2PxGNKzsQcxS3rtphIpWwHX4/x2xvI17wA5gN/+eG5kLrV14q7CXklXRtCFWn5lLUwIDAQAB
+      #服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+      notifyUrl: http://g5u4p7.natappfree.cc/alipay/callback
+      #页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+      returnUrl: http://g5u4p7.natappfree.cc
+    #微信支付参数配置
+    wxpay:
+      #公众号appid
+      appId:
+      #商户id
+      mchId:
+      #支付api安全密钥
+      mchKey:
+      #支付结果回调地址
+      payNotify: http://0b228e36.ngrok.io/wx/callback
+      #退款结果回调(该值暂时还未使用到，因为退款我并没有做回调，待以后完善吧)
+      refundNotify:
+      #项目根目录根目录下的证书名称(退款需要用到证书)
+      certName: wx_pay_cert.p12
+
